@@ -1,0 +1,31 @@
+vector<int> Solution::maxset(vector<int> &A) 
+{
+    vector<int>ans;
+    long long int start=0, end=0, ansStart=0, ansLength=0, ansEnd=-1, sum = INT_MIN, max=INT_MIN;
+    int i=0;
+    while(i<A.size())
+    {
+        if(A[i]>=0)
+        {
+            start=i;
+            sum=0;
+            while(A[i]>=0 && i<A.size())
+            {
+                sum+=A[i];
+                i++;
+            }
+            end=i-1;
+            if((sum>max)|| ( sum==max && end - start +1 < ansLength ))
+            {
+                ansStart = start;
+                ansEnd = end;
+                ansLength = start + end -1 ;
+                max = sum;
+            }
+        }
+        i++;
+    }
+    for(int i=ansStart;i<=ansEnd;i++)
+        ans.push_back(A[i]);
+    return ans;
+}

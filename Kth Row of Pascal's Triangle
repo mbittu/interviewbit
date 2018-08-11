@@ -1,0 +1,24 @@
+vector<int> Solution::getRow(int A) 
+{
+    vector<vector<int>>res(A+1);
+    for(int i=0;i<A+1;i++)
+        res[i].resize(i+1);
+    res[0]={1};
+    
+    for(int i=1;i<=A;i++)
+    {
+        for(int j=0;j<res[i].size();j++)
+        {
+            if(j>0 && j<res[i].size()-1)
+                res[i][j]=res[i-1][j-1]+res[i-1][j];
+            else if(j==0)
+                res[i][j]=res[i-1][j];
+            else if(j==res[i].size()-1)
+                res[i][j]=res[i-1][j-1];
+        }
+    }
+    vector<int>ans;
+    for(int i=0;i<res[A].size();i++)
+        ans.push_back(res[A][i]);
+    return ans;
+}

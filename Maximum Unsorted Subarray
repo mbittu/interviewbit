@@ -1,0 +1,56 @@
+int sort(vector<int> &A)
+{
+    for(int i=0;i<A.size()-1;i++)
+    {
+        if(A[i+1]<A[i])
+            return 0;
+    }
+    return 1;
+}
+vector<int> Solution::subUnsort(vector<int> &A) 
+{
+    if(sort(A))
+        return vector<int>{-1};
+    int n=A.size();
+    int start,end;
+    for(int i=0;i<n-1;i++)
+    {
+        if(A[i+1]<A[i])
+        {
+            start=i;
+            break;
+        }
+    }
+    for(int i=n-1;i>0;i--)
+    {
+        if(A[i-1]>A[i])
+        {
+            end=i;
+            break;
+        }
+    }
+    int max=INT_MIN;
+    int min=INT_MAX;
+    for(int i=start;i<=end;i++)
+    {
+        if(A[i]>max)
+            max=A[i];
+        if(A[i]<min)
+            min=A[i];
+    }
+    for(int i=start;i>=0;i--)
+    {
+        if(A[i]>min)
+        {
+            start=i;
+        }
+    }
+    for(int i=end+1;i<n;i++)
+    {
+        if(A[i]<max)
+        {
+            end=i;
+        }
+    }
+    return vector<int>{start,end};
+}

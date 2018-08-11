@@ -1,0 +1,29 @@
+vector<int> Solution::plusOne(vector<int> &A)
+{
+    vector<int>ans;
+    reverse(A.begin(),A.end());
+    int carry=1;
+    int x;
+    for(int i=0;i<A.size();i++)
+    {
+        x=A[i];
+        x+=carry;
+        if(x>=10)
+        {
+            int rem=x%10;
+            carry=x/10;
+            ans.push_back(rem);
+        }
+        else
+        {
+            ans.push_back(x);
+            carry=0;
+        }
+    }
+    if(carry!=0)
+        ans.push_back(carry);
+    while(ans[ans.size()-1]==0)
+        ans.pop_back();
+    reverse(ans.begin(),ans.end());
+    return ans;
+}

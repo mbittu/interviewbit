@@ -1,0 +1,25 @@
+bool Solution::hotel(vector<int> &a, vector<int> &d, int k) 
+
+{   int n=d.size();
+    vector<pair<int,int>>res;
+    for(int i=0;i<n;i++)
+    {
+        res.push_back(make_pair(a[i],1));
+        res.push_back(make_pair(d[i],0));
+    }
+    int curr=0,maxi=0;
+    sort(res.begin(),res.end());
+    for(int i=0;i<res.size();i++)
+    {
+        if(res[i].second==1)
+        {
+            curr++;
+            maxi=max(curr,maxi);
+        }
+        else
+            curr--;
+    }
+    if(maxi>k)
+        return 0;
+    return 1;
+}
